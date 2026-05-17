@@ -1295,49 +1295,19 @@
          y los dos <div class="hero-badge-float">...</div> de abajo.
       2. Descomenta el bloque <img> de abajo y pega tu imagen en base64.
       3. Ajusta el estilo si lo necesitas (border-radius, width, etc.)
-      
-
-      <img
-  src="data:/png;base64,"
-  alt="Imagen principal"
-  style="
-    width: 100%;
-    max-width: 480px;
-    border-radius: 24px;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.18);
-    position: relative;
-    z-index: 2;
-    display: block;
-    margin: 0 auto;
-  "
-/>
       -->
+<div class="hero-img-wrap">
+        <img
+          src="img/hero.png"
+          alt="Alvarez Digital Dev – Diseño web profesional"
+          class="hero-img"
+          onerror="this.closest('.hero-img-wrap').classList.add('hero-img-placeholder')"
+        />
+      
       
 
       
-      <div class="hero-card-main">
-        <div class="mock-browser">
-          <div class="mock-bar">
-            <div class="mock-dots">
-              <div class="mock-dot"></div>
-              <div class="mock-dot"></div>
-              <div class="mock-dot"></div>
-            </div>
-            <div class="mock-url">tunegocio.com</div>
-          </div>
-          <div class="mock-content">
-            <div class="mock-hero-block">
-              <div class="mock-h"></div>
-              <div class="mock-p"></div>
-            </div>
-            <div class="mock-cards">
-              <div class="mock-card"><div class="mk-icon"></div><div class="mk-line"></div><div class="mk-line short"></div></div>
-              <div class="mock-card"><div class="mk-icon"></div><div class="mk-line"></div><div class="mk-line short"></div></div>
-              <div class="mock-card"><div class="mk-icon"></div><div class="mk-line"></div><div class="mk-line short"></div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
       <div class="hero-badge-float badge-float-1">
         <span class="badge-icon">🚀</span>
         <div>
