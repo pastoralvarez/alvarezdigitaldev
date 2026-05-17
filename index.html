@@ -380,6 +380,63 @@
   .badge-float-2 { bottom: -20px; left: -30px; animation: floatY 6s ease-in-out infinite 1s; }
   .badge-icon { font-size: 1.1rem; }
 
+  /* ── HERO IMAGE ── */
+  .hero-img-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  .hero-img {
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,180,255,0.08);
+    display: block;
+    margin: 0 auto;
+    object-fit: cover;
+    animation: floatY 6s ease-in-out infinite;
+  }
+
+
+  /* ── HERO ENTRANCE ANIMATIONS ── */
+  @keyframes heroFadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes heroFadeRight {
+    from { opacity: 0; transform: translateX(40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes heroFadeLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes typewriter {
+    from { width: 0; }
+    to   { width: 100%; }
+  }
+  @keyframes clientsFadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Hero text column — staggered fade-up */
+  .hero-badge       { animation: heroFadeUp 0.6s ease both; animation-delay: 0.1s; opacity: 0; }
+  .hero h1          { animation: heroFadeUp 0.7s ease both; animation-delay: 0.25s; opacity: 0; }
+  .hero-content > p { animation: heroFadeUp 0.7s ease both; animation-delay: 0.4s; opacity: 0; }
+  .hero-actions     { animation: heroFadeUp 0.7s ease both; animation-delay: 0.55s; opacity: 0; }
+  .hero-stats       { animation: heroFadeUp 0.7s ease both; animation-delay: 0.7s; opacity: 0; }
+
+  /* Hero image column — slide from right */
+  .hero-visual      { animation: heroFadeRight 0.9s cubic-bezier(0.22,1,0.36,1) both; animation-delay: 0.35s; opacity: 0; }
+
+  /* Clients strip */
+  .clients-label    { animation: clientsFadeUp 0.6s ease both; animation-delay: 0.2s; opacity: 0; }
+  .clients-logos    { animation: clientsFadeUp 0.7s ease both; animation-delay: 0.4s; opacity: 0; }
+
   /* ── CLIENTS ── */
   .clients {
     background: var(--white);
@@ -1108,11 +1165,37 @@
     background: rgba(255,255,255,0.98);
     z-index: 999;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 32px;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
   }
   .mobile-menu.open { display: flex; }
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 70px;
+    border-bottom: 1.5px solid var(--blue-100);
+    flex-shrink: 0;
+  }
+  .mobile-menu-logo {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--gray-900);
+    text-decoration: none;
+    letter-spacing: -1px;
+  }
+  .mobile-menu-logo .dot { color: var(--electric); }
+  .mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    gap: 28px;
+  }
   .mobile-menu a {
     font-family: var(--font-display);
     font-size: 1.8rem;
@@ -1122,13 +1205,13 @@
   }
   .mobile-menu a:hover { color: var(--electric); }
   .mobile-close {
-    position: absolute;
-    top: 24px; right: 24px;
     font-size: 1.5rem;
     cursor: pointer;
     color: var(--gray-600);
     background: none;
     border: none;
+    line-height: 1;
+    padding: 4px;
   }
 
   /* ── RESPONSIVE ── */
@@ -1158,15 +1241,16 @@
     .hamburger { display: flex; }
 
     /* Hero */
-    .hero { padding: 60px 5% 48px; min-height: auto; }
-    .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 0; }
-    .hero-visual { display: none; }
+    .hero { padding: 48px 5% 48px; min-height: auto; }
+    .hero-inner { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+    .hero-visual { display: flex; }
+    .hero-img { max-width: 100%; border-radius: var(--radius); animation: none; box-shadow: 0 12px 48px rgba(0,0,0,0.14); }
     .hero-actions { justify-content: center; flex-direction: column; align-items: center; }
     .hero-actions a { width: 100%; max-width: 320px; justify-content: center; }
     .hero-stats { justify-content: center; gap: 20px; flex-wrap: wrap; }
     .hero h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); letter-spacing: -0.5px; }
 
-    /* Badges flotantes - eliminar desborde */
+    /* Badges flotantes - ocultar en móvil para evitar desborde */
     .hero-badge-float { display: none; }
 
     /* Sections */
@@ -1245,19 +1329,24 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" id="mobileClose">✕</button>
-  <a href="#servicios" onclick="closeMobileMenu()">Servicios</a>
-  <a href="#planes" onclick="closeMobileMenu()">Planes</a>
-  <a href="#portafolio" onclick="closeMobileMenu()">Portafolio</a>
-  <a href="#nosotros" onclick="closeMobileMenu()">Nosotros</a>
-  <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
-  <a href="#contacto" onclick="closeMobileMenu()" style="color:var(--electric)">Cotizar →</a>
+  <div class="mobile-menu-header">
+    <a href="#" class="mobile-menu-logo">Alvarez<span class="dot">.</span>Digital Dev</a>
+    <button class="mobile-close" id="mobileClose">✕</button>
+  </div>
+  <div class="mobile-menu-links">
+    <a href="#servicios" onclick="closeMobileMenu()">Servicios</a>
+    <a href="#planes" onclick="closeMobileMenu()">Planes</a>
+    <a href="#portafolio" onclick="closeMobileMenu()">Portafolio</a>
+    <a href="#nosotros" onclick="closeMobileMenu()">Nosotros</a>
+    <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+    <a href="#contacto" onclick="closeMobileMenu()" style="color:var(--electric)">Cotizar →</a>
+  </div>
 </div>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div>
+    <div class="hero-content">
       <div class="hero-badge">
         <span class="pulse"></span>
         Agencia de Desarrollo Web & Marketing Digital
